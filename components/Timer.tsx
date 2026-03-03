@@ -151,7 +151,7 @@ export default function Timer({ taskName = '今日のタスクを入力', onMode
       {/* タスク名・ポモドーロ数 */}
       <div className="text-center">
         <p className="text-neutral-700 text-sm">📝 {taskName}</p>
-        <p className="text-neutral-400 text-xs mt-1">今日 {pomodoroCount} 杯目</p>
+        <p className="text-neutral-400 text-xs mt-1">☕️ {pomodoroCount} 杯目</p>
       </div>
     </div>
   )
