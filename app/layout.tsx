@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "virtual komeda",
-  description: "バーチャルカフェで集中するポモドーロタイマー",
+  description: "バーチャルコメダで集中するポモドーロタイマー",
   robots: {
     index: false,
     follow: false,

@@ -53,7 +53,7 @@ export default function EntryPage() {
         <div className="text-center">
           <p className="text-4xl mb-2">☕</p>
           <h1 className="text-2xl font-bold text-neutral-900">virtual komeda</h1>
-          <p className="text-sm text-neutral-500 mt-1">みんな大好き『コメダ』で集中だ！</p>
+          <p className="text-sm text-neutral-500 mt-1">バーチャルコメダで集中だ</p>
         </div>
 
         {/* 入力フォーム */}
