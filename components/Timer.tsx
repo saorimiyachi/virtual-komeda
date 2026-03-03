@@ -38,6 +38,20 @@ export default function Timer({ taskName = '今日のタスクを入力', onMode
   const [timeLeft, setTimeLeft] = useState(PRESETS[0].work)
   const [isRunning, setIsRunning] = useState(false)
   const [pomodoroCount, setPomodoroCount] = useState(0)
+  const [pomodoroCountLoaded, setPomodoroCountLoaded] = useState(false)
+
+  // マウント時にlocalStorageからポモドーロ数を復元
+  useEffect(() => {
+    const saved = localStorage.getItem('pomodoroCount')
+    if (saved) setPomodoroCount(parseInt(saved, 10))
+    setPomodoroCountLoaded(true)
+  }, [])
+
+  // 復元完了後のみlocalStorageに保存（初回レンダーの0による上書きを防ぐ）
+  useEffect(() => {
+    if (!pomodoroCountLoaded) return
+    localStorage.setItem('pomodoroCount', pomodoroCount.toString())
+  }, [pomodoroCount, pomodoroCountLoaded])
 
   const currentPreset = PRESETS[presetIndex]
 

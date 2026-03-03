@@ -86,7 +86,8 @@ export default function RoomPage() {
   // タイマーのモード切り替え時にSupabaseを更新
   const handleModeChange = useCallback(async (mode: 'work' | 'break', pomodoroCount: number) => {
     if (!sessionId) return
-    await supabase.from('sessions').update({ status: mode, pomodoro_count: pomodoroCount }).eq('id', sessionId)
+    const status = mode === 'work' ? 'working' : 'break'
+    await supabase.from('sessions').update({ status, pomodoro_count: pomodoroCount }).eq('id', sessionId)
   }, [sessionId])
 
   // 退店
@@ -97,6 +98,7 @@ export default function RoomPage() {
     localStorage.removeItem('sessionId')
     localStorage.removeItem('nickname')
     localStorage.removeItem('taskName')
+    localStorage.removeItem('pomodoroCount')
     router.push('/')
   }
 
