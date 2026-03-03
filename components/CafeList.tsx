@@ -60,8 +60,8 @@ export default function CafeList({ sessions, mySessionId }: Props) {
             {status === 'working' ? '作業に集中' : '休憩中'}
           </Badge>
         </div>
-        <p className="text-xs text-neutral-600 truncate">{taskName || '（タスクなし）'}</p>
-        <p className="text-xs text-neutral-400 mt-0.5">{pomodoroCount} 杯目</p>
+        <p className="text-xs text-neutral-600 truncate">📝 {taskName || '（タスクなし）'}</p>
+        <p className="text-xs text-neutral-400 mt-0.5">☕️ {pomodoroCount} 杯目</p>
       </CardContent>
     </Card>
   )
