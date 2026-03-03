@@ -5,4 +5,5 @@ export type Session = {
   status: 'working' | 'break'
   pomodoro_count: number
   created_at: string
+  last_seen_at: string
 }

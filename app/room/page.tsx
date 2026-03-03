@@ -32,9 +32,14 @@ export default function RoomPage() {
   useEffect(() => {
     if (!sessionId) return
 
-    // 初回取得
+    // 2分以内に生存確認があったセッションのみ取得
     const fetchSessions = async () => {
-      const { data } = await supabase.from('sessions').select('*').order('created_at')
+      const twoMinutesAgo = new Date(Date.now() - 45 * 1000).toISOString()
+      const { data } = await supabase
+        .from('sessions')
+        .select('*')
+        .gt('last_seen_at', twoMinutesAgo)
+        .order('created_at')
       if (data) setSessions(data as Session[])
     }
     fetchSessions()
@@ -53,31 +58,29 @@ export default function RoomPage() {
       })
       .subscribe()
 
-    // リアルタイムが届かない場合のポーリング（5秒ごとに再取得）
+    // ポーリング（5秒ごとに再取得・TTLフィルタを適用）
     const pollingInterval = setInterval(fetchSessions, 5000)
-
-    // タブを閉じたときにセッションを削除
-    // keepalive: true でページ閉鎖後もリクエストを完了させる
-    const handleBeforeUnload = () => {
-      fetch(
-        `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/sessions?id=eq.${sessionId}`,
-        {
-          method: 'DELETE',
-          headers: {
-            apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-            Authorization: `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!}`,
-          },
-          keepalive: true,
-        }
-      )
-    }
-    window.addEventListener('beforeunload', handleBeforeUnload)
 
     return () => {
       clearInterval(pollingInterval)
       supabase.removeChannel(channel)
-      window.removeEventListener('beforeunload', handleBeforeUnload)
     }
+  }, [sessionId])
+
+  // ハートビート（30秒ごとにlast_seen_atを更新）
+  useEffect(() => {
+    if (!sessionId) return
+
+    const heartbeat = async () => {
+      await supabase
+        .from('sessions')
+        .update({ last_seen_at: new Date().toISOString() })
+        .eq('id', sessionId)
+    }
+    heartbeat()
+    const interval = setInterval(heartbeat, 15000)
+
+    return () => clearInterval(interval)
   }, [sessionId])
 
   // タイマーのモード切り替え時にSupabaseを更新
