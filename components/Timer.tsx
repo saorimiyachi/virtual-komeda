@@ -87,6 +87,9 @@ export default function Timer({ taskName = '今日のタスクを入力', onMode
   }, [timeLeft, isRunning, handleTimerEnd])
 
   const handleStartPause = () => {
+    if (!isRunning) {
+      onModeChange?.(mode, pomodoroCount)
+    }
     setIsRunning(prev => !prev)
   }
 
@@ -94,6 +97,7 @@ export default function Timer({ taskName = '今日のタスクを入力', onMode
     setIsRunning(false)
     setMode('work')
     setTimeLeft(currentPreset.work)
+    onModeChange?.('work', pomodoroCount)
   }
 
   const handlePresetChange = (index: number) => {
