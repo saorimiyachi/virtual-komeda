@@ -8,15 +8,15 @@ import { Badge } from '@/components/ui/badge'
 const TARGET_TOTAL = 0
 
 const ALL_DUMMIES: Omit<Session, 'created_at'>[] = [
-  { id: 'dummy-1', nickname: 'たろう', task_name: '資料作成', status: 'working', pomodoro_count: 2 },
-  { id: 'dummy-2', nickname: 'はなこ', task_name: 'コード書き', status: 'break', pomodoro_count: 4 },
-  { id: 'dummy-3', nickname: 'ゆうき', task_name: '企画書まとめ', status: 'working', pomodoro_count: 1 },
-  { id: 'dummy-4', nickname: 'みか', task_name: 'デザイン確認', status: 'working', pomodoro_count: 3 },
-  { id: 'dummy-5', nickname: 'けんじ', task_name: '読書', status: 'working', pomodoro_count: 5 },
-  { id: 'dummy-6', nickname: 'あかり', task_name: '勉強中', status: 'break', pomodoro_count: 2 },
-  { id: 'dummy-7', nickname: 'そうた', task_name: 'メール整理', status: 'working', pomodoro_count: 1 },
-  { id: 'dummy-8', nickname: 'なつき', task_name: '報告書作成', status: 'working', pomodoro_count: 3 },
-  { id: 'dummy-9', nickname: 'りょう', task_name: 'ちょっと一息', status: 'break', pomodoro_count: 2 },
+  { id: 'dummy-1', nickname: 'たろう', task_name: '資料作成', status: 'working', pomodoro_count: 2, last_seen_at: '' },
+  { id: 'dummy-2', nickname: 'はなこ', task_name: 'コード書き', status: 'break', pomodoro_count: 4, last_seen_at: '' },
+  { id: 'dummy-3', nickname: 'ゆうき', task_name: '企画書まとめ', status: 'working', pomodoro_count: 1, last_seen_at: '' },
+  { id: 'dummy-4', nickname: 'みか', task_name: 'デザイン確認', status: 'working', pomodoro_count: 3, last_seen_at: '' },
+  { id: 'dummy-5', nickname: 'けんじ', task_name: '読書', status: 'working', pomodoro_count: 5, last_seen_at: '' },
+  { id: 'dummy-6', nickname: 'あかり', task_name: '勉強中', status: 'break', pomodoro_count: 2, last_seen_at: '' },
+  { id: 'dummy-7', nickname: 'そうた', task_name: 'メール整理', status: 'working', pomodoro_count: 1, last_seen_at: '' },
+  { id: 'dummy-8', nickname: 'なつき', task_name: '報告書作成', status: 'working', pomodoro_count: 3, last_seen_at: '' },
+  { id: 'dummy-9', nickname: 'りょう', task_name: 'ちょっと一息', status: 'break', pomodoro_count: 2, last_seen_at: '' },
 ]
 
 type Props = {
